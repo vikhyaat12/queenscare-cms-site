@@ -1,0 +1,87 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to store content in
+
+media_folder: "images/uploads" # Folder where uploaded files will be stored
+public_folder: "/images/uploads" # The location where the site will find the images
+
+collections:
+  - name: "site_settings" # A single file collection for general settings
+    label: "Site Settings & Theme"
+    folder: "content" # Will create/update _index.md
+    file: "_index.md"
+    fields:
+      - {label: "Site Logo", name: "logo_image", widget: "image", required: false, default: "/images/uploads/default-logo.png", hint: "Upload your company logo."}
+      - label: "Hero Section"
+        name: "hero_section"
+        widget: "object"
+        fields:
+          - {label: "Heading", name: "hero_heading", widget: "string", default: "Enhancing Health & Life Quality"}
+          - {label: "Subheading", name: "hero_subheading", widget: "string", default: "Premium supplements crafted with innovation and care."}
+          - {label: "Product CTA Button Text", name: "hero_cta_product_text", widget: "string", default: "Our Products"}
+          - {label: "Learn More CTA Button Text", name: "hero_cta_learn_more_text", widget: "string", default: "Learn More"}
+      - label: "About Us"
+        name: "about_us"
+        widget: "object"
+        fields:
+          - {label: "About Us Content", name: "about_us_body", widget: "markdown", default: "## Our Story\n\nFounded in 2010, Queens Care Laboratories blends scientific excellence with elegant design to deliver health solutions that empower and delight.\n\n### Our Philosophy\n\nAt Queens Care, we believe that true well-being comes from a combination of cutting-edge science and genuine compassion. We are committed to developing supplements that are not only effective but also align with our core values."}
+      - label: "Why Choose Us"
+        name: "why_choose_us"
+        widget: "object"
+        fields:
+          - {label: "Points", name: "why_choose_us_points", widget: "list", default: ["Quality without compromise", "Innovative formulations", "Customer well-being first", "Ethical & sustainable"], field: {label: "Point", name: "point", widget: "string"}}
+      - label: "Contact Info"
+        name: "contact_info"
+        widget: "object"
+        fields:
+          - {label: "Email", name: "email", widget: "string", default: "info@queenscare.co.in"}
+          - {label: "Phone", name: "phone", widget: "string", default: "+91 98765 43210"}
+          - {label: "Address", name: "address", widget: "text", default: "123 Healthway, Wellness City, State, Country - 123456"}
+          - {label: "WhatsApp Link", name: "whatsapp_link", widget: "string", default: "https://wa.me/919876543210", hint: "Full WhatsApp URL (e.g., https://wa.me/91XXXXXXXXXX)"}
+          - {label: "Google Map Embed Code", name: "google_map_embed_code", widget: "text", default: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1400.00000000000000000000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAwJzAwLjAiTiAxNzDCsDAwJzAwLjAiRQ!5e0!3m2!1sen!2sin!4v1678888888888!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>', hint: "Paste your Google Maps embed iframe code here."}
+      - label: "Social Media Links"
+        name: "social_media_links"
+        widget: "list"
+        fields:
+          - {label: "Platform Name", name: "name", widget: "string", hint: "e.g., Facebook, Instagram, Twitter"}
+          - {label: "Profile URL", name: "url", widget: "string"}
+      - label: "Theme Editor"
+        name: "theme_editor"
+        widget: "object"
+        fields:
+          - {label: "Background Color", name: "background_color", widget: "color", default: "#F8F8F8"}
+          - {label: "Text Color", name: "text_color", widget: "color", default: "#333333"}
+          - {label: "Heading Color", name: "heading_color", widget: "color", default: "#333333"}
+          - {label: "Primary Gradient Start", name: "primary_gradient_start", widget: "color", default: "#6A11CB"}
+          - {label: "Primary Gradient End", name: "primary_gradient_end", widget: "color", default: "#2575FC"}
+
+  - name: "products"
+    label: "Our Products"
+    folder: "content/products"
+    create: true # Allow users to create new products
+    slug: "{{slug}}" # Use the title as the file name slug
+    fields:
+      - {label: "Product Name", name: "title", widget: "string"}
+      - {label: "Product Image", name: "image", widget: "image", required: false, default: "/images/uploads/default-product.png"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", timeFormat: false, required: false}
+
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Author Name", name: "author", widget: "string"}
+      - {label: "Quote", name: "quote", widget: "text"}
+      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", timeFormat: false, required: false}
+
+  - name: "faqs"
+    label: "FAQs"
+    folder: "content/faqs"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Question", name: "question", widget: "string"}
+      - {label: "Answer", name: "body", widget: "markdown"}
+      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", timeFormat: false, required: false}
